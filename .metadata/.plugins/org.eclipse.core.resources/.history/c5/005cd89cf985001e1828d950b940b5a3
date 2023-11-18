@@ -1,0 +1,39 @@
+package com.chargingstation;
+
+public class Main {
+
+	public static void main(String[]args)
+	{
+		ChargingStation[] cs = new ChargingStation[7];
+        Car[] c = new Car[5];
+        for(int i =0;i<cs.length;i++)
+        {
+        	cs[i] = new ChargingStation();
+        }
+        for(int i =0;i<c.length;i++)
+        {
+        	c[i] = new Car();
+        }
+        
+        
+outerloop:for(int i =0;i<c.length;i++)
+		{
+			for(int j=0;j<cs.length;j++)
+			{
+				//cs[j].ChargeCar(c[i]);
+				if(c[i].chargeState==true)
+				{
+					continue outerloop;
+				}
+					
+			}
+		}
+     for(int i =0; i<c.length;i++)
+     {
+    	 System.out.println(c[i].chargeState);
+     }
+
+      
+		
+	}
+}

@@ -1,0 +1,27 @@
+package com.chargingstation;
+
+public class Car {
+boolean chargeState;
+int id;
+Car()
+{
+	this.chargeState = false;
+	this.id = 0;
+	
+}
+Car(int id)
+{
+	this.chargeState = false;
+	this.id = id;
+	
+}
+Carwait()
+{
+	int timer = 100;
+	timer--;
+}
+boolean getchargeState()
+{
+	return this.chargeState;
+}
+}

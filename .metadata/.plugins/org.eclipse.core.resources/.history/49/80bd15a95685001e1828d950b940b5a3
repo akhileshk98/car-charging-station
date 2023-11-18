@@ -1,0 +1,23 @@
+package com.chargingstation;
+
+public class ChargingStation extends Thread {
+	int capacity;
+	int occupied_slots;
+	public void chargecar(Car c)
+	{
+		
+	}
+	ChargingStation()
+	{
+		this.capacity = 5;
+		this.occupied_slots =0;
+	}
+    void setcapacity(int capacity)
+    {
+    	this.capacity = capacity;
+    }
+    int getoccupiedslots()
+    { 
+    	return this.occupied_slots;
+    }
+}

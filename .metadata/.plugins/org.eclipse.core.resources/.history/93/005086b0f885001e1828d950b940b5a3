@@ -1,0 +1,15 @@
+package com.chargingstation;
+
+public class Main {
+
+	public static void main(String[]args)
+	{
+		ChargingStation[] cs = new ChargingStation[7];
+        Car[] c = new Car[5];
+        
+        
+		
+      
+		
+	}
+}
