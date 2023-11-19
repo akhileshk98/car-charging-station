@@ -2,7 +2,7 @@ package com.chargingstation;
 
 public class Main {
 
-	public static void main(String[]args)
+	public static void main(String[] args) throws ClassNotFoundException
 	{
 		//Array created for Charging stations
 		ChargingStation[] cs = new ChargingStation[7];
