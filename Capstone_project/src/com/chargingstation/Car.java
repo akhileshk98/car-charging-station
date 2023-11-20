@@ -1,5 +1,13 @@
 package com.chargingstation;
 
+import static java.nio.file.StandardOpenOption.APPEND;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Scanner;
+
 public class Car {
 boolean chargeState;
 int id;
@@ -26,5 +34,9 @@ void setid(int id)
 boolean getchargeState()
 {
 	return this.chargeState;
+}
+int getid()
+{
+	return this.id;
 }
 }
