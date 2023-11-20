@@ -22,14 +22,12 @@ public class DataLogMaintainer {
 
     public static void queueData(String userId, String vehicleNumber) {
         FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(QUEUE_FILE_PATH, true);
-
+        try {BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(QUEUE_FILE_PATH, true))) {
             String data = "User ID: " + userId + System.lineSeparator() +
                           "Vehicle Number: " + vehicleNumber + System.lineSeparator() +
                           System.lineSeparator();
 
-            fileOutputStream.write(data.getBytes());
+            bufferedWriter.write(data);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
