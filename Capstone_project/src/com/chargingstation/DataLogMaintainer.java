@@ -1,4 +1,5 @@
 import java.io.FileOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class DataLogMaintainer {
@@ -7,13 +8,12 @@ public class DataLogMaintainer {
     private static final String QUEUE_FILE_PATH = "C:\\Akhil\\Desktop\\QueueVehicles.txt";
 
     public static void chargeFinishedData(String userId, String vehicleNumber, String chargingStation) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(COMPLETED_FILE_PATH, true)) {
-            String data = "User ID: " + userId + System.lineSeparator() +
-                          "Vehicle Number: " + vehicleNumber + System.lineSeparator() +
-                          "Charging Station: " + chargingStation + System.lineSeparator() +
-                          System.lineSeparator();
-
-            fileOutputStream.write(data.getBytes());
+        try (FileWriter fileWriter = new FileWriter(COMPLETED_FILE_PATH, true)) {
+            fileWriter.write("User ID: " + userId + System.lineSeparator());
+            fileWriter.write("Vehicle Number: " + vehicleNumber + System.lineSeparator());
+            fileWriter.write("Charging Station: " + chargingStation + System.lineSeparator());
+            fileWriter.write(System.lineSeparator());
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
