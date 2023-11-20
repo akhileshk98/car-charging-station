@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.io.*;
 public class Main {
 
-	public static void main(String[]args) throws ClassNotFoundException,CarNotChargedException,ChargeStationfullException
+	public static void main(String[]args) throws ClassNotFoundException,CarNotChargedException,ChargeStationfullException,ChargingError
 	{
 		//Array created for Charging stations
  File systemLogFile = new File("logs/system_log.txt");
