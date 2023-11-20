@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.io.*;
 public class Main {
 
-	public static void main(String[]args) throws ClassNotFoundException,CarNotChargedException,ChargeStationfullException,ChargingError
+	public static void main(String[]args) throws ClassNotFoundException,CarNotChargedException,ChargeStationfullException,InsufficientEnergyError
 	{
 		//Array created for Charging stations
  File systemLogFile = new File("logs/system_log.txt");
@@ -120,7 +120,7 @@ public class Main {
         }
         
 	}
-	public static void StartCharging(Car c[], ChargingStation cs[])throws ClassNotFoundException,ChargeStationfullException
+	public static void StartCharging(Car c[], ChargingStation cs[])throws ClassNotFoundException,ChargeStationfullException,InsufficientEnergyError
 	{
  //No concurrency considered. Every car in the array is matched with the charging station.
  //If the charge of the car is not true, then we move on to the next charging station.

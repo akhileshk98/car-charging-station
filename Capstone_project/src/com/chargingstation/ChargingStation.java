@@ -9,7 +9,7 @@ public class ChargingStation{
 	TimeslotManager ts;
     int Energy;
 //public method to charge the car
-	public void ChargeCar(Car c) throws ClassNotFoundException,ChargingError {
+	public void ChargeCar(Car c) throws ClassNotFoundException,InsufficientEnergyError {
 		try {
 			if (capacity > occupied_slots) {
 				initiate_charge(c);
