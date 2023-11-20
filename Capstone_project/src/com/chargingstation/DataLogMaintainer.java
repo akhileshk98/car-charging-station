@@ -23,10 +23,7 @@ public class DataLogMaintainer {
     public static void queueData(String userId, String vehicleNumber) {
         FileOutputStream fileOutputStream = null;
         try {BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(QUEUE_FILE_PATH, true))) {
-            String data = "User ID: " + userId + System.lineSeparator() +
-                          "Vehicle Number: " + vehicleNumber + System.lineSeparator() +
-                          System.lineSeparator();
-
+            String data = "User ID: " + userId + System.lineSeparator() + "Vehicle Number: " + vehicleNumber + System.lineSeparator() + System.lineSeparator();
             bufferedWriter.write(data);
         } catch (IOException e) {
             e.printStackTrace();
