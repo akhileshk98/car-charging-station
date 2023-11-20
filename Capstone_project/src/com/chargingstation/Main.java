@@ -2,13 +2,16 @@ package com.chargingstation;
 
 public class Main {
 
-	public static void main(String[]args)
+	public static void main(String[]args) throws ChargingError
 	{
+		
 		//Array created for Charging stations
 		ChargingStation[] cs = new ChargingStation[7];
+		
 		//Array created for cars
         Car[] c = new Car[5];
         //Object creation
+        
         for(int i =0;i<cs.length;i++)
         {
         	cs[i] = new ChargingStation();
@@ -36,3 +39,4 @@ outerloop:for(int i =0;i<c.length;i++)
 		
 	}
 }
+
