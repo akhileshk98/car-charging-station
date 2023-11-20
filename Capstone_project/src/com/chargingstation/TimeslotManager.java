@@ -124,7 +124,7 @@ public class TimeslotManager {
 	    if(owner.getName().equals(s1))
 	    {
 	       System.out.println("What operation would you like to perform?");
-	       System.out.println("1.delete file \n2.empty contents");
+	       System.out.println("1.delete file %n2.empty contents");
 	       Scanner in_admin = new Scanner(System.in);
 	       String operation = in_admin.nextLine();
 	       switch(operation) {
