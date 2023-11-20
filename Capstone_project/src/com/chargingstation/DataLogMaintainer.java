@@ -13,30 +13,30 @@ public class DataLogMaintainer {
             fileWriter.write("Vehicle Number: " + vehicleNumber + System.lineSeparator());
             fileWriter.write("Charging Station: " + chargingStation + System.lineSeparator());
             fileWriter.write(System.lineSeparator());
-            
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void queueData(String userId, String vehicleNumber) {
-     
-        try {BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(QUEUE_FILE_PATH, true))) {
-            String data = "User ID: " + userId + System.lineSeparator() + "Vehicle Number: " + vehicleNumber + System.lineSeparator() + System.lineSeparator();
+        BufferedWriter bufferedWriter = null;
+
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(QUEUE_FILE_PATH, true));
+            String data = "User ID: " + userId + System.lineSeparator() +
+                          "Vehicle Number: " + vehicleNumber + System.lineSeparator() +
+                          System.lineSeparator();
             bufferedWriter.write(data);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (fileOutputStream != null) {
-                    fileOutputStream.close();
+                if (bufferedWriter != null) {
+                    bufferedWriter.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
     }
-
 }
