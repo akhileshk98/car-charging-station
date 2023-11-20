@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5306778-a696-499f-ad4e-64b4b9a3705a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/chargingstation/Car.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/chargingstation/ChargingStation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/chargingstation/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chargingstation/ChargingStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chargingstation/ChargingStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chargingstation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chargingstation/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
