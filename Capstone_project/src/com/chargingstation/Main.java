@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String[]args) throws ClassNotFoundException,CarNotChargedException,ChargeStationfullException,InsufficientEnergyError
 	{
 		//Array created for Charging stations
- File systemLogFile = new File("logs/system_log.txt");
+		File systemLogFile = new File("logs/system_log.txt");
         File chargingStationLogFile = new File("logs/charging_station_log.txt");
         File energyManagementSystemLogFile = new File("logs/energy_management_system.txt");
 
