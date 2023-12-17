@@ -1,12 +1,46 @@
 package com.chargingstation;
-import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.*;
-public class Main {
 
-	public static void main(String[]args) throws ClassNotFoundException,CarNotChargedException,ChargeStationfullException,InsufficientEnergyError
+public class Main{
+	public static void main(String[] args)
 	{
-		//Array created for Charging stations
- File systemLogFile = new File("logs/system_log.txt");
+	  ChargingStation [] cs = new ChargingStation[3];
+	  Thread[]thread_consumer = new Thread[3];
+	  SharedResource sharedResource = new SharedResource();
+	  ArrayList<UserName> User_List = new ArrayList<>();
+	  ArrayList<Car> Car_List = new ArrayList<>();
+	 
+	  for(int i = 0;i<2;i++)
+	  {
+		  new UserName().NewUserRegistration(User_List);
+	  }
+	  
+	  
+	  for(int i =0;i<cs.length;i++)
+	  {
+		  cs[i]= new ChargingStation(sharedResource,i);
+		  thread_consumer[i] =  new Thread(cs[i]);
+	  }
+	  for(int i =0;i<2;i++)
+	  {
+	    new TimeSlotManager().timeslot(cs, User_List,Car_List);
+	  }
+	  Thread thread_producer = new Thread(new Producer(sharedResource,Car_List));
+	  
+      thread_producer.start();
+      for(int i=0;i<cs.length;i++)
+      {
+      	
+      	thread_consumer[i].start();
+      }
+      Logging.FetchLogFiles();
+      //LogManager();
+      
+	}
+	public static void LogManager()
+	{
+		File systemLogFile = new File("logs/system_log.txt");
         File chargingStationLogFile = new File("logs/charging_station_log.txt");
         File energyManagementSystemLogFile = new File("logs/energy_management_system.txt");
 
@@ -69,78 +103,6 @@ public class Main {
             LogManager.deleteLogFile("energy_management_system", "energy_management_system_log.txt");
             LogManager.createLogFile("energy_management_system", "energy_management_system_log.txt");
         }
-		ChargingStation[] cs = new ChargingStation[7];
-		//Array created for cars
-        Car[] c = new Car[5];
-        UserName[] user = new UserName[5];
-       
-        //Object creation
-        try
-        {
-        for(int i =0;i<cs.length;i++)
-        {
-        	cs[i] = new ChargingStation(i);
-        }
-        for(int i =0;i<c.length;i++)
-        {
-        	c[i] = new Car(i);
-        	user[i]= new UserName();
-        }
-        user[0].userName = "Craig";
-        user[0].c = c[0];
-        user[1].userName = "Ronnie2";
-        user[1].c = c[1];
-        user[2].userName = "Mira3";
-        user[2].c = c[2];
-        user[3].userName = "Janet123";
-        user[3].c = c[3];
-        user[4].userName = "Simon";
-        user[4].c = c[4];
-        System.out.println("Would you like to open the timeslotManager");
-        Scanner input = new Scanner(System.in);
-        switch(input.nextLine())
-        {
-        case "yes":
-              TimeslotManager ts = new TimeslotManager();
-              ts.mode(user, cs);
-            break;
-        case "no":
-        	System.out.println("Thank you, you cannot use the system without booking");
-        default:
-        	System.out.println("Unrecognized input");
-        }
-        StartCharging(c,cs);
-        }catch(ChargeStationfullException e)
-        {
-        	throw new CarNotChargedException("Car is not charged",e);
-        }
-        catch(ArrayIndexOutOfBoundsException e)
-        {
-        	
-        }
-        
+
 	}
-	public static void StartCharging(Car c[], ChargingStation cs[])throws ClassNotFoundException,ChargeStationfullException,InsufficientEnergyError
-	{
- //No concurrency considered. Every car in the array is matched with the charging station.
- //If the charge of the car is not true, then we move on to the next charging station.
-		//cs[number].ChargeCar(null);
-outerloop:for(int i =0;i<c.length;i++)
-		{
-			for(int j=0;j<cs.length;j++)
-			{
-				cs[j].ChargeCar(c[i]);
-				if(c[i].getchargeState()==true)
-				{
-					continue outerloop;
-				}
-					
-			}
-            if(c[i].getchargeState()==false)
-            {
-            	throw new ChargeStationfullException("No empty slot found");
-            }
-		}
-	}
-     
 }
