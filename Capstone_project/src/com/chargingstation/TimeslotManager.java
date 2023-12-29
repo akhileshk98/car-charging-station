@@ -1,12 +1,18 @@
 package com.chargingstation;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-import static java.nio.file.StandardOpenOption.*;
-import java.io.*;
-import java.nio.file.*;
-import java.nio.file.attribute.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public class TimeSlotManager{
 	boolean dateValid;
@@ -24,7 +30,7 @@ public class TimeSlotManager{
 //			
 //		}
 //	}
-	TimeSlotManager()
+public TimeSlotManager()
 	{
         File logsDirectory = new File("TimeslotManager");
         if (!logsDirectory.exists()) {
@@ -130,7 +136,7 @@ private void Usermode(Car c,ArrayList<Car> List)
 	}
 	
 }
-private void BookSlot(Car c, String date, String filepath)
+void BookSlot(Car c, String date, String filepath)
 {
 	Path p = Paths.get(filepath);
 	File f = new File(filepath);
@@ -196,7 +202,7 @@ private void adminmode() throws IOException
     	f.setWritable(false);
     }
 }
-private static boolean ValidateDate(String date)
+static boolean ValidateDate(String date)
 {
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
 

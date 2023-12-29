@@ -10,13 +10,19 @@ int remove;
 long available_charge;
 Object lock1 = new Object();
 Object lock2 = new Object();
-ChargingStation(SharedResource sharedResource,int id)
+public ChargingStation(SharedResource sharedResource, int id)
 {
     this.sharedResource = sharedResource;
     this.available_charge = 500;
 	this.id = id;
 }
-public void run()
+
+    public ChargingStation(SharedResource sharedResource) {
+
+        this.sharedResource = sharedResource;
+    }
+
+    public void run()
 {	while(true)
 	{
 		Car car = sharedResource.removeCar();
