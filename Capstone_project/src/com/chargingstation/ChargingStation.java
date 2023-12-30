@@ -31,8 +31,7 @@ public ChargingStation(SharedResource sharedResource, int id)
 
             while (space_available == 0) {
                 try {
-                	Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + " is waiting for a slot in the charging station");
-                    //System.out.println("No slots available. Car " + car.id + " is waiting for a slot in charging station"+ this.id);
+                    Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + " is waiting for a slot in the charging station");
                     long start_time = System.currentTimeMillis();
                     lock1.wait(5000); // Wait if there are no available slots
                     if(System.currentTimeMillis()-start_time<5000)
@@ -48,12 +47,10 @@ public ChargingStation(SharedResource sharedResource, int id)
                           car.ChargeState = true;
                           car.slot_booked=false;
                           Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "charged in charging station");
-                          //System.out.println("Car " + car.id + " charged in charging Station"+ this.id);
                         }
                     	else
                     	{
-                    		Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "had to book a slot first");
-                    		//System.out.println("Car"+car.id+"please book a slot first");
+                    	  Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "had to book a slot first");
                     	}
                     }
                     else
@@ -66,7 +63,6 @@ public ChargingStation(SharedResource sharedResource, int id)
                     space_available++;
                     }
                     Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "is charged");
-                    //System.out.println("Car ID " + car.id + " in charging station " + this.id + " charged in charging station"+ this.id);
                     this.available_charge-=25;
                     ChargeReserveCheck(this);
                     
@@ -83,8 +79,7 @@ public ChargingStation(SharedResource sharedResource, int id)
                 }
                 catch(CarNotChargedException e)
                 {
-                	Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "got tired of waiting and left the Charging Station");
-                	//System.out.println("Car " + car.id + "got tired of waiting and left Charging Station"+ this.id);
+                    Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "got tired of waiting and left the Charging Station");
                 }
                 catch(InsufficientEnergyException e)
                 {
@@ -106,18 +101,15 @@ public ChargingStation(SharedResource sharedResource, int id)
             {
             	if(car.slot_booked==true)
             	{
-            		Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "is charging in the charging station");
-            	  //System.out.println("Car " + car.id + " is charging in charging station"+ this.id);
+            	  Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "is charging in the charging station");
                   Thread.sleep(5000); // Simulate charging time
                   car.ChargeState = true;
                   car.slot_booked=false;
                   Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "charged in charging station");
-                  //System.out.println("Car " + car.id + " charged in charging Station"+ this.id);
                 }
             	else
             	{
-            		Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "had to book a slot first");
-            		//System.out.println("Car"+car.id+"please book a slot first");
+            	   Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + "had to book a slot first");
             	}
             }
             else
