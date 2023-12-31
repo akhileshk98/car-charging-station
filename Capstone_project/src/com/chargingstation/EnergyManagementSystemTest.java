@@ -1,7 +1,8 @@
 package com.chargingstation;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
 public class EnergyManagementSystemTest {
 
     @Test
@@ -10,7 +11,7 @@ public class EnergyManagementSystemTest {
         EnergyManagementSystem energyManagementSystem = new EnergyManagementSystem(chargingStation);
         energyManagementSystem.weatherCondition = EnergyManagementSystem.WeatherCondition.SUNNY;
         EnergyManagementSystem.EnergySource energySource = energyManagementSystem.HandleEnergySources();
-        assertEquals(EnergyManagementSystem.EnergySource.WIND, energySource);
+        assertEquals(EnergyManagementSystem.EnergySource.SOLAR, energySource);
     }
 
     @Test

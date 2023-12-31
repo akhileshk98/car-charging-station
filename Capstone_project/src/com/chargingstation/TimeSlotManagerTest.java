@@ -1,13 +1,24 @@
 package com.chargingstation;
+//
+//import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.Test;
+//package com.timeslot.Manager;
 
+//import org.junit.jupiter.api.Test;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static org.junit.jupiter.api.Assertions.assertFalse;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class TimeSlotManagerTest {
+public class TimeSlotManagerTest {
 
     @Test
     public void testValidateDate_ValidDate_ReturnsTrue() {
@@ -24,12 +35,14 @@ class TimeSlotManagerTest {
     }
 
     @Test
-    public void testBookSlot_SlotBookedSuccessfully() throws IOException {
+    public void testBookSlot_SlotBookedSuccessfully(){
         TimeSlotManager timeSlotManager = new TimeSlotManager();
         Car car = new Car(1);
         String date = "29/12/2023";
         String filepath = "TimeslotManager\\Timeslot.txt";
-
+	    String input = "12:00 to 13:00";
+	    ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+	    System.setIn(in);
         timeSlotManager.BookSlot(car, date, filepath);
 
         assertTrue(car.slot_booked);

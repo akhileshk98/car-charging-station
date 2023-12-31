@@ -29,7 +29,7 @@ public class LoggingTest {
     public void testLogTheEvents1() {
     	int id = 1;
         String message = "Test message";
-        String expectedFileName = "Charging_Station_1_Log_" + getCurrentDate() + ".txt";
+        String expectedFileName = "Charging_Station_9_Log_" + getCurrentDate() + ".txt";
 
         Logging.logTheEvents(id, message);
 

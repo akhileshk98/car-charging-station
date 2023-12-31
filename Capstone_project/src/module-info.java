@@ -4,5 +4,6 @@
 /**
  * 
  */
-module Capstone_project {
+module capstone {
+	requires junit;
 }

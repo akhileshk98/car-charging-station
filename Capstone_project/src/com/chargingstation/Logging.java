@@ -159,7 +159,7 @@ class Logging {
             return content.toString();
         }
         
-        private static boolean ValidateDate(String date)
+        public static boolean ValidateDate(String date)
         {
         	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
 

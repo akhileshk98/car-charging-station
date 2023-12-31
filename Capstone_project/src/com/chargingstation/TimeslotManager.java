@@ -13,8 +13,7 @@ import java.util.Scanner;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
-
-public class TimeSlotManager{
+ class TimeSlotManager{
 	boolean dateValid;
 	Path filepath;
 	ChargingStation [] cs ;
@@ -30,7 +29,7 @@ public class TimeSlotManager{
 //			
 //		}
 //	}
-public TimeSlotManager()
+ TimeSlotManager()
 	{
         File logsDirectory = new File("TimeslotManager");
         if (!logsDirectory.exists()) {
@@ -136,7 +135,7 @@ private void Usermode(Car c,ArrayList<Car> List)
 	}
 	
 }
-void BookSlot(Car c, String date, String filepath)
+public void BookSlot(Car c, String date, String filepath)
 {
 	Path p = Paths.get(filepath);
 	File f = new File(filepath);
@@ -202,7 +201,7 @@ private void adminmode() throws IOException
     	f.setWritable(false);
     }
 }
-static boolean ValidateDate(String date)
+public static boolean ValidateDate(String date)
 {
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
 

@@ -1,4 +1,4 @@
-package com.timeslot.Manager;
+package com.chargingstation;
 
 import static org.junit.Assert.*;
 

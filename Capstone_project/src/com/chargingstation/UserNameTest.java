@@ -1,4 +1,4 @@
-package com.timeslot.Manager;
+package com.chargingstation;
 import java.io.*;
 import java.util.ArrayList;
 
