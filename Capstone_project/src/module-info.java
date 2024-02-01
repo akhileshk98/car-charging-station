@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * 
- */
-module capstone {
-	requires junit;
-}
