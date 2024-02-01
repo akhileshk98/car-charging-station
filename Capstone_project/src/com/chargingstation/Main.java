@@ -2,6 +2,14 @@ package com.chargingstation;
 import java.util.ArrayList;
 import java.io.*;
 
+
+@ProjectMetadata(
+	projectName = "car-charging-station",
+	version = "5.0",
+	description = "JAVA Capstone Project Team 10", 
+	developer = {"Akhilesh Kakkayamkode", "Akhil Narayanaswamy", "Krithika Premkumar", "Vipin Krishna Vijayakumar"}
+)
+
 public class Main{
 	public static void main(String[] args)
 	{
