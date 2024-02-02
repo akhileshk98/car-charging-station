@@ -19,7 +19,7 @@ public class Main{
 	  ArrayList<UserName> User_List = new ArrayList<>();
 	  ArrayList<Car> Car_List = new ArrayList<>();
 	 
-	  System.out.println("How would you like to see the results of our project.Enter 1 for an interactive display %nEnter 2 for a predefined set of producers");
+	  System.out.println("How would you like to see the results of our project.\nEnter 1 for an interactive display \nEnter 2 for a predefined set of producers");
 	  Scanner in = new Scanner(System.in);
 	  int Value = Integer.parseInt(in.nextLine());
 	  switch (Value){
