@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class SharedResourceTest {
 
+	// Verify that the ID of the removed car matches the ID of the car that was added
 	@Test
 	public void testaddandremoveCar() {
 		SharedResource sharedResource = new SharedResource();
