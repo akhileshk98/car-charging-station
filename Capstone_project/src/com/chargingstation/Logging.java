@@ -8,38 +8,37 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Scanner;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+
+
 
 class Logging {
 
     public static void logTheEvents(int id, String message) {
-
-    	String timing = new SimpleDateFormat("HH:mm:ss").format(new Date());
-
-        try {
-            File logsDirectory = new File("logs");
-            if (!logsDirectory.exists()) {
-                logsDirectory.mkdirs(); 
-            }
-
-            String datestamp = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(logsDirectory, "Charging_Station_" + id + "_Log_" + datestamp+ ".txt"), true))) {
-                
-                writer.write( message + " at " + timing + "\n");
-            }
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        
+    	// Here we are logging the events that are happening in the charging station
+    	String datestamp = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+    	String fileName = "Charging_Station_" + id + "_Log_" + datestamp + ".txt";
+    	LogWriter(message, fileName);
+           
+    } 
+    
+    public static void logTheEnergyManagementEvents(String message) {
+    	// This section of the code is logging the events that are happening in the Energy Management
+    	String datestamp = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+    	String fileName = "EnergyManagement_Log_" + datestamp +".txt";
+    	LogWriter(message, fileName);		
         
     }
     
-    public static void logTheEnergyManagementEvents(String message) {
-
+    public static void LogWriter(String message, String fileName)
+	{
+		// This section is used to write the log messages to the corresponding files
     	String timing = new SimpleDateFormat("HH:mm:ss").format(new Date());
 
         try {
@@ -47,31 +46,70 @@ class Logging {
             if (!logsDirectory.exists()) {
                 logsDirectory.mkdirs(); 
             }
+            File outputFile = new File(logsDirectory, fileName);
 
-            String datestamp = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(logsDirectory, "EnergyManagement_Log_" + datestamp+".txt"), true))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
                 
                 writer.write( message + " at " + timing + "\n");
+            }
+            
+            // this section creates a new file if the existing file is greater than 10MB
+            if (outputFile.length() > 19485760) { // 10MB = 10485760 bytes
+            	// the previously existing file will be stored under new name "old_" + previousfilename
+            	File newLogFile = new File(logsDirectory, "old_" + fileName);
+            	outputFile.renameTo(newLogFile);
             }
             
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        
-        
-    }
 
 
+	}  
+    // this method will delete the log files which are older than 30 days
+    public static void DeleteOldLogFiles() throws IOException  {
+        String logFileName = "deleted_log_files.txt";
+    	File logsDirectory = new File("logs");
+		if (!logsDirectory.exists()) {
+		    logsDirectory.mkdirs(); 
+		}
+		File outputFile = new File(logsDirectory, logFileName);
+		String directoryPath = outputFile.getParent();
+        int daysThreshold = 30;
 
+            try {
+                BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFileName, true));
+
+                Files.walkFileTree(Paths.get(directoryPath), new SimpleFileVisitor<Path>() {
+                    @Override
+                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                        if (ChronoUnit.DAYS.between(attrs.creationTime().toInstant(), Instant.now()) > daysThreshold) {
+                            String deletedFileName = file.getFileName().toString();
+
+                            // Append the deleted file name to the log file
+                            logWriter.write("Deleted file: " + deletedFileName + "\n");
+
+                            // Delete the file
+                            Files.delete(file);
+                        }
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
+
+                logWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    	// This function is called for fetching the log files 
     	public static void FetchLogFiles() {
             Scanner scanner = new Scanner(System.in);
             String name1=null;
             String name2=null;
             String regexPattern=null;
             int k=0;     
-            System.out.println("Enter which option number would you like access to, 0 or 1?");
+            System.out.println("Enter which option number would you like access to, 1 or 2?");
             System.out.println("1.Charging Station \n2.Energy Management");
             try {
             int i = Integer.parseInt(scanner.nextLine());
@@ -147,7 +185,7 @@ class Logging {
             }
     	}
 
-
+    	// This segment will read the log files
         private static String readLogFile(String filePath) throws IOException {
             StringBuilder content = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -159,7 +197,8 @@ class Logging {
             return content.toString();
         }
         
-        public static boolean ValidateDate(String date)
+        // This part validates the date format entered
+        static boolean ValidateDate(String date)
         {
         	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
 
