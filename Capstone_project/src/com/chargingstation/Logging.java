@@ -27,7 +27,7 @@ class Logging {
             String datestamp = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(logsDirectory, "Charging_Station_" + id + "_Log_" + datestamp+ ".txt"), true))) {
                 
-                writer.write( message + "at" + timing + "\n");
+                writer.write( message + " at " + timing + "\n");
             }
             
         } catch (IOException e) {
@@ -52,7 +52,7 @@ class Logging {
             
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(logsDirectory, "EnergyManagement_Log_" + datestamp+".txt"), true))) {
                 
-                writer.write( message + "at" + timing + "\n");
+                writer.write( message + " at " + timing + "\n");
             }
             
         } catch (IOException e) {
