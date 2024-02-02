@@ -60,11 +60,11 @@ public class EnergyManagementSystem implements Runnable {
 			synchronized (lock1) {
 				try {
 					Logging.logTheEnergyManagementEvents(
-							"Charging Station " + cs.id + "getting charged with SOLAR Energy");
+							"Charging Station " + cs.getChargingStationID() + "getting charged with SOLAR Energy");
 					Thread.sleep(3000);
-					cs.available_charge += 200;
-					Logging.logTheEnergyManagementEvents("Charging of station " + cs.id
-							+ "with SOLAR Energy done.Available charge now is " + cs.available_charge);
+					cs.setAvailableCharge(200);
+					Logging.logTheEnergyManagementEvents("Charging of station " + cs.getChargingStationID()
+							+ "with SOLAR Energy done.Available charge now is " + cs.getChargeavailability());
 				} catch (InterruptedException e) {
 					// Handle any interrupted exception that occurs during sleep
 				}
@@ -74,11 +74,11 @@ public class EnergyManagementSystem implements Runnable {
 			synchronized (lock1) {
 				try {
 					Logging.logTheEnergyManagementEvents(
-							"Charging Station " + cs.id + "getting charged with WIND Energy");
+							"Charging Station " + cs.getChargingStationID() + "getting charged with WIND Energy");
 					Thread.sleep(3000);
-					cs.available_charge += 300;
-					Logging.logTheEnergyManagementEvents("Charging of station " + cs.id
-							+ "with WIND Energy done.Available charge now is " + cs.available_charge);
+					cs.setAvailableCharge(300);
+					Logging.logTheEnergyManagementEvents("Charging of station " + cs.getChargingStationID()
+							+ "with WIND Energy done.Available charge now is " + cs.getChargeavailability());
 				} catch (InterruptedException e) {
 					// Handle any interrupted exception that occurs during sleep
 				}
@@ -87,11 +87,11 @@ public class EnergyManagementSystem implements Runnable {
 		case GRID:
 			synchronized (lock1) {
 				try {
-					Logging.logTheEnergyManagementEvents("Charging Station " + cs.id + "getting charged from the GRID");
+					Logging.logTheEnergyManagementEvents("Charging Station " + cs.getChargingStationID() + "getting charged from the GRID");
 					Thread.sleep(300);
-					cs.available_charge += 250;
-					Logging.logTheEnergyManagementEvents("Charging of station " + cs.id
-							+ "from the GRID is done.Available charge now is " + cs.available_charge);
+					cs.setAvailableCharge(250);
+					Logging.logTheEnergyManagementEvents("Charging of station " + cs.getChargingStationID()
+							+ "from the GRID is done.Available charge now is " + cs.getChargeavailability());
 				} catch (InterruptedException e) {
 					// Handle any interrupted exception that occurs during sleep
 				}

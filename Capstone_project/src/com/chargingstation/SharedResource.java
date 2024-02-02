@@ -1,7 +1,7 @@
 package com.chargingstation;
 import java.util.ArrayList;
 import java.util.List;
-
+// This class is created to have a common pool of cars which are waiting to be consumed by any of the charging stations
 class SharedResource {
     private final List<Car> chargingList = new ArrayList<>();
 

@@ -3,9 +3,9 @@ public class ChargingStation implements Runnable{
 int id;
 private final SharedResource sharedResource;
 int space_available = 2;
-long wait_time = 5000;
 long available_charge;
 Object lock1 = new Object();
+
 public ChargingStation(SharedResource sharedResource, int id)
 {
     this.sharedResource = sharedResource;
@@ -17,7 +17,20 @@ public ChargingStation(SharedResource sharedResource) {
 
     this.sharedResource = sharedResource;
 }
-
+//setters
+public void setAvailableCharge(long charge)
+{
+	this.available_charge = this.available_charge + charge;
+}
+//getters
+public long getChargeavailability()
+{
+	return this.available_charge;
+}
+public long getChargingStationID()
+{
+	return this.id;
+}
 public void run()
    {
       while(true)
@@ -27,51 +40,51 @@ public void run()
          synchronized(lock1)
          { 
         	//this code block is to show if there is a spot available in the charging station
-            if(space_available>0&& car.ChargeState==false&& (car.status.equals("wait")==false))
+            if(space_available>0&& car.getChargeState()==false&& (car.getstatus().equals("wait")==false))
             {
-                  Logging.logTheEvents(this.id, "Car of car id "+car.id+"arrived at charging station "+ this.id);
+                  Logging.logTheEvents(this.id, "Car of car id "+car.getID()+"arrived at charging station "+ this.id);
                   //Decrement the slot to show it is occupied.
                   space_available--;
-                  Logging.logTheEvents(this.id, "Car of car id "+car.id+" at charging station "+ this.id+ " has occupied a slot and the space available now is "+ space_available);
+                  Logging.logTheEvents(this.id, "Car of car id "+car.getID()+" at charging station "+ this.id+ " has occupied a slot and the space available now is "+ space_available);
                   try {
                   if(this.available_charge>=250)
                   {
                 	 //Reduce the charge for charging the car.
                      this.available_charge-=250;
-                     Logging.logTheEvents(this.id, "Car of car id "+ car.id+" at charging station "+ this.id + " has reduced the charge.Charge now is "+available_charge);
+                     Logging.logTheEvents(this.id, "Car of car id "+ car.getID()+" at charging station "+ this.id + " has reduced the charge.Charge now is "+available_charge);
                   }
                   else
                   {
                 	  //No sufficient charge is present so free up the space.Throw an exception so that the rest of the block is not executed.
-                	  Logging.logTheEvents(this.id,"Car of car id "+ car.id + " at charging station "+ this.id +" faced issue of no charge at the station");
+                	  Logging.logTheEvents(this.id,"Car of car id "+ car.getID() + " at charging station "+ this.id +" faced issue of no charge at the station");
                 	  space_available++;
-                	  Logging.logTheEvents(this.id,"Due to no charge, Car of car id "+ car.id+" at the charging station, freed up a space. Available space now is "+ space_available);
+                	  Logging.logTheEvents(this.id,"Due to no charge, Car of car id "+ car.getID()+" at the charging station, freed up a space. Available space now is "+ space_available);
                 	  lock1.notify();//notify the waiting thread about the slot availability
                       throw new InsufficientEnergyException("Charging Station needs some more energy.Please come again later");
                   }
                   //Update the status of the car as ongoing so that it does not go to the wait block.
-                  car.status = "ongoing";
+                  car.setCarStatus("ongoing");
                   Thread chargingThread = new Thread(() -> {    
                   try 
                   {
                 	  //Only cars with booked slots should be charged.
-                     if(car.slot_booked==true)
+                     if(car.getslotStatus()==true)
                      {
-                        Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + " is charging in the charging station");
+                        Logging.logTheEvents(this.id ,"Car ID " + car.getID() + " in charging station " + this.id + " is charging in the charging station");
                         Thread.sleep(5000); // Simulate charging time
-                        car.ChargeState = true;
-                        Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + " charged in charging station");
-                        car.slot_booked=false;
+                        car.setChargeState(true);
+                        Logging.logTheEvents(this.id ,"Car ID " + car.getID() + " in charging station " + this.id + " charged in charging station");
+                        car.setslotStatus(false);
                      }
                      else
                      {
-                        Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + " had to book a slot first");
+                        Logging.logTheEvents(this.id ,"Car ID " + car.getID() + " in charging station " + this.id + " had to book a slot first");
                      }
                      synchronized(lock1)
                      {
                     	//Free up the spot in case slot is not booked or charging is complete
                         space_available++;
-                        Logging.logTheEvents(this.id, "Car ID "+car.id+" freed up a spot and space available now is "+ space_available);
+                        Logging.logTheEvents(this.id, "Car ID "+car.getID()+" freed up a spot and space available now is "+ space_available);
                         lock1.notify();//notify the waiting thread about the slot availability
                         //To check if the station has enough charge
                         ChargeReserveCheck(this);
@@ -91,14 +104,14 @@ public void run()
                   }
                }
                //this code block is to show cars that had arrived at the charging station but there was no slot available
-               while (space_available == 0 && (car.status.equals("ongoing")==false)) 
+               while (space_available == 0 && (car.getstatus().equals("ongoing")==false)) 
                {
-                  if(car.slot_booked==true) 
+                  if(car.getslotStatus()==true) 
                   {
                      try
                      {
-                        Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + " is waiting for a slot in the charging station");
-                        car.status = "wait";
+                        Logging.logTheEvents(this.id ,"Car ID " + car.getID() + " in charging station " + this.id + " is waiting for a slot in the charging station");
+                        car.setCarStatus("wait");
                         long start_time = System.currentTimeMillis();
                         lock1.wait(5000); // Wait if there are no available slots
                         try 
@@ -109,7 +122,7 @@ public void run()
                         	   
                               if(space_available>0)
                               {
-                            	  Logging.logTheEvents(this.id, "Car ID "+ car.id +" that was waiting, got a spot within its waiting capacity");
+                            	  Logging.logTheEvents(this.id, "Car ID "+ car.getID() +" that was waiting, got a spot within its waiting capacity");
                                  space_available--;
                                  if(this.available_charge>=250)
                                  {
@@ -117,19 +130,19 @@ public void run()
                                  }
                                  else
                                  {
-                                	 Logging.logTheEvents(this.id,"Car of car id "+ car.id + " at charging station "+ this.id +"faced issue of no charge at the station");
+                                	 Logging.logTheEvents(this.id,"Car of car id "+ car.getID() + " at charging station "+ this.id +"faced issue of no charge at the station");
                             	  //Free up space since there is no energy in the station
                                   space_available++;
-                            	  Logging.logTheEvents(this.id,"Due to no charge, Car of car id "+ car.id+" at the charging station, freed up a space. Available space now is "+ space_available);
+                            	  Logging.logTheEvents(this.id,"Due to no charge, Car of car id "+ car.getID()+" at the charging station, freed up a space. Available space now is "+ space_available);
                                   throw new InsufficientEnergyException("Charging Station needs some more energy.Please come again later");
 		                         }
 		                    	
                                  Thread.sleep(5000); // Simulate charging time
-                                 car.ChargeState = true;
-                                 car.slot_booked=false;
-                                 Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + " that was waiting now got charged");
+                                 car.setChargeState(true);;
+                                 car.setslotStatus(false);
+                                 Logging.logTheEvents(this.id ,"Car ID " + car.getID() + " in charging station " + this.id + " that was waiting now got charged");
                                  space_available++;
-                                 Logging.logTheEvents(this.id, "Car ID" +car.id+" that was waiting now freed up space. Available space now is "+ space_available);
+                                 Logging.logTheEvents(this.id, "Car ID" +car.getID()+" that was waiting now freed up space. Available space now is "+ space_available);
                                  ChargeReserveCheck(this);
                                  }
                               else
@@ -141,9 +154,9 @@ public void run()
                            else
                            {
                         	   //Since the car got tired of waiting, add it back to the queue.
-                        	   Logging.logTheEvents(this.id,"Car of car id "+ car.id+ " got tired of waiting and is now added back to the queue");
+                        	   Logging.logTheEvents(this.id,"Car of car id "+ car.getID()+ " got tired of waiting and is now added back to the queue");
                               sharedResource.addCar(car);
-                              car.status = "available";
+                              car.setCarStatus("available");
                               
                            }
                         }
@@ -167,7 +180,7 @@ public void run()
                   }
                   else
                   {
-                	  Logging.logTheEvents(this.id ,"Car ID " + car.id + " in charging station " + this.id + " had to book a slot first");
+                	  Logging.logTheEvents(this.id ,"Car ID " + car.getID() + " in charging station " + this.id + " had to book a slot first");
                   }
              }
           }
@@ -179,7 +192,7 @@ private void ChargeReserveCheck(ChargingStation cs)
    {
    if(cs.available_charge<=495)
     {
-		Thread Thread1 = new Thread(new EnergyManagementSystem(cs));
+		Thread Thread1 = new Thread(new EnergyManagementSystem(cs));//Create a separate thread to charge the stations
 		Thread1.start();
     }
    }
