@@ -1,0 +1,24 @@
+Car of car id 1arrived at charging station 1 at 21:35:36
+Car of car id 1 at charging station 1 has occupied a slot and the space available now is 1 at 21:35:36
+Car of car id 1 at charging station 1 has reduced the charge.Charge now is 250 at 21:35:36
+Car ID 1 in charging station 1 is charging in the charging station at 21:35:36
+Car of car id 4arrived at charging station 1 at 21:35:37
+Car of car id 4 at charging station 1 has occupied a slot and the space available now is 0 at 21:35:37
+Car of car id 4 at charging station 1 has reduced the charge.Charge now is 0 at 21:35:37
+Car ID 4 in charging station 1 is charging in the charging station at 21:35:37
+Car ID 7 in charging station 1 is waiting for a slot in the charging station at 21:35:38
+Car ID 1 in charging station 1 charged in charging station at 21:35:41
+Car ID 1 freed up a spot and space available now is 1 at 21:35:41
+Car of car id 7 got tired of waiting and is now added back to the queue at 21:35:41
+Car of car id 7arrived at charging station 1 at 21:35:41
+Car of car id 7 at charging station 1 has occupied a slot and the space available now is 0 at 21:35:41
+Car of car id 7 at charging station 1 faced issue of no charge at the station at 21:35:41
+Due to no charge, Car of car id 7 at the charging station, freed up a space. Available space now is 1 at 21:35:41
+Due to insufficient charge faced, initiating charging of the station at 21:35:41
+Car of car id 19arrived at charging station 1 at 21:35:41
+Car of car id 19 at charging station 1 has occupied a slot and the space available now is 0 at 21:35:41
+Car of car id 19 at charging station 1 faced issue of no charge at the station at 21:35:41
+Due to no charge, Car of car id 19 at the charging station, freed up a space. Available space now is 1 at 21:35:41
+Due to insufficient charge faced, initiating charging of the station at 21:35:41
+Car ID 4 in charging station 1 charged in charging station at 21:35:42
+Car ID 4 freed up a spot and space available now is 2 at 21:35:42
