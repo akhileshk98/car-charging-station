@@ -1,5 +1,7 @@
 # CAR CHARGING STATION
 This project is a simulation of a car charging station that utilizes several alternative sources of energy. It aims to provide a realistic model of car charging stations, taking into account factors such as multiple locations, charging time, car waiting time, and weather conditions. The simulation includes a weather condition component that logs the situation at the charging station. It enables the switching between alternative energy sources based on the simulated weather conditions.
+To demonstrate our simulation we have two methods. One is through an interactive way in which the user must register and book a slot after which they can have access to the charging station.
+Another way to demonstrate simulatenous charging of multiple cars across different charging station, we have created a fixed pool of around 20 cars.
 
 ## Technologies Used
 - Programming Language- Java
@@ -10,6 +12,9 @@ This project is a simulation of a car charging station that utilizes several alt
 - Akhilesh Kakkayamkode (7218923)
 - Akhil Narayanaswamy (7219528)
 - Vipin Krishna Vijayakumar (7219307)
+
+## Youtube link to the final presentation of Capstone
+https://youtu.be/XkSMqDrfa0M
 
 ## Task Breakdown
 ### Hometask1:
