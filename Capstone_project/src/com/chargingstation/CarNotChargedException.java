@@ -1,12 +1,13 @@
 package com.chargingstation;
 
 public class CarNotChargedException extends Exception {
-	CarNotChargedException()
-	{
+	// Default constructor for the exception
+	CarNotChargedException() {
 		super();
 	}
-	CarNotChargedException(String s,Throwable cause)
-	{
-		super(s,cause);
+
+	// Constructor with a message and cause for the exception
+	CarNotChargedException(String s, Throwable cause) {
+		super(s, cause);
 	}
 }

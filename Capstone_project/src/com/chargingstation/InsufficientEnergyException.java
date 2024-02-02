@@ -1,11 +1,13 @@
 package com.chargingstation;
 
 public class InsufficientEnergyException extends Exception {
-    public InsufficientEnergyException() {
-        super();
-    }
+	// Default constructor without a message
+	public InsufficientEnergyException() {
+		super();
+	}
 
-    public InsufficientEnergyException(String message) {
-        super(message);
-    }
+	// Constructor with a custom message
+	public InsufficientEnergyException(String message) {
+		super(message);
+	}
 }
