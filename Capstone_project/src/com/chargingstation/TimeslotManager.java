@@ -9,6 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import static java.nio.file.StandardOpenOption.APPEND;
@@ -17,18 +20,7 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 	boolean dateValid;
 	Path filepath;
 	ChargingStation [] cs ;
-//
-//	TimeSlotManager(Path filepath)
-//	{
-//		this.filepath = filepath;
-//		try {
-//		Files.createFile(this.filepath);
-//		}
-//		catch(IOException e)
-//		{
-//			
-//		}
-//	}
+
  TimeSlotManager()
 	{
         File logsDirectory = new File("TimeslotManager");
@@ -45,83 +37,94 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 		}
 		
 	}
+ // this prompt asks the user to enter the timeslot manager
+ // where he or she can book the slot or enter into the admin mode
 public void timeslot(ChargingStation [] cs,ArrayList<UserName>List,ArrayList<Car>Priority_List)
 {
 	this.cs = cs;
 	System.out.println("Would you like to open the Timeslot Manager");
 	Scanner in = new Scanner(System.in);
-	if((in.nextLine()).equals("yes"))
-	{
-		CheckValidUser(List,Priority_List);
-	}
-	else
-	{
-		System.out.println("Charging station can be used only with prebooked slots");
-	}
-}
+ 	try {
+ 	if((in.nextLine().toLowerCase()).equals("yes"))
+ 	{
+ 		CheckValidUser(List,Priority_List);
+ 	}
+ 	else
+ 	{
+ 		System.out.println("Charging station can be used only with prebooked slots");
+ 	}
+ 	} catch (NoSuchElementException e) {
+ 	    System.out.println("No input found.");
+ 	}
+ }
+
+// this section will validate whether the entered user credentials are correct or not
 private void CheckValidUser(ArrayList<UserName>List,ArrayList<Car>Priority_List)
 {
 	System.out.println("Are you an existing user?");
 	Scanner in = new Scanner(System.in);
 	boolean user_identified = false;
-	if((in.nextLine()).equals("yes"))
-	{
-		System.out.println("Please enter the username");
-		String username = in.nextLine();
+	String response = in.nextLine().toLowerCase();
+		if(response.equals("yes"))
+		{
+			List<String> userList = Arrays.asList("akhilesh", "akhil", "krithika", "vipink");
+			System.out.println("Please enter the username");
+			String userName = in.nextLine();
 
-			if(username.equals("Krithika"))
-			{
-				System.out.println("Please enter the password");
-				for(UserName obj : List)
+				if(userList.contains(userName)) // here we are checking whether the user is admin or not
 				{
-					if(obj.userName.equals(username))
+					System.out.println("Please enter the password");
+					for(UserName obj : List)
 					{
-						if(obj.password.equals(in.nextLine()))
+						if(obj.userName.equals(userName))
 						{
-							System.out.println("Hello Admin");
-							user_identified = true;
-							try {
-								adminmode();
-							}catch(Exception e)
+							if(obj.password.equals(in.nextLine()))
 							{
-								
-							}						
-						}
-						else
-						{
-							System.out.println("Incorrect password");
+								System.out.println("Hello Admin");
+								user_identified = true;
+								try {
+									adminmode(); // admin will be entering into the admin mode
+								}catch(Exception e)
+								{
+									
+								}						
+							}
+							else
+							{
+								System.out.println("Incorrect password");
+							}
 						}
 					}
 				}
-			}
-			else
-			{
-				for(UserName obj: List)
+				else
 				{
-					if(obj.userName.equals(username))
+					for(UserName obj: List)
 					{
-						System.out.println("Please enter the password");
-						if(obj.password.equals(in.nextLine()))
-						{   
-							user_identified = true;
-							System.out.println("Hello"+obj.userName);
-							Usermode(obj.c,Priority_List);
-							
-						}
-						else
+						if(obj.userName.equals(userName))
 						{
-							System.out.println("Incorrect password");
+							System.out.println("Please enter the password");
+							if(obj.password.equals(in.nextLine()))
+							{   
+								user_identified = true;
+								System.out.println("Hello"+obj.userName);
+								Usermode(obj.c,Priority_List); // this is the user mode
+								
+							}
+							else
+							{
+								System.out.println("Incorrect password");
+							}
 						}
 					}
 				}
-			}
-			if(user_identified== false)
-			{
-			  System.out.println("No such user, please register with us");	
-			}
+				if(!user_identified)
+				{
+				  System.out.println("No such user, please register with us");	
+				}
 }
 }
 
+// this function describes the functionalities present in the user mode
 private void Usermode(Car c,ArrayList<Car> List)
 {
 	Scanner in = new Scanner(System.in);
@@ -135,6 +138,7 @@ private void Usermode(Car c,ArrayList<Car> List)
 	}
 	
 }
+//User can pre-book the time slot for the charging
 public void BookSlot(Car c, String date, String filepath)
 {
 	Path p = Paths.get(filepath);
@@ -143,27 +147,17 @@ public void BookSlot(Car c, String date, String filepath)
 	try (BufferedWriter filewrite = Files.newBufferedWriter(p,APPEND);BufferedReader fileread = Files.newBufferedReader(p))
 	{
 
-		String line;
 		System.out.println("Please choose one of the timeslot");
-		System.out.println("1. 12:00 to 13:00 %n2.15:00 to 16:00 %n3. 10:00 to 11:00");
+		System.out.println("1. 12:00 to 13:00");
+        System.out.println("2. 15:00 to 16:00");
+        System.out.println("3. 10:00 to 11:00");
 		Scanner in = new Scanner(System.in);
 		String time = in.nextLine();
-//		int priority = 1;
-		//f.setWritable(true);
-//		while((line = fileread.readLine())!=null)
-//		{
-//			if(line.contains(time))
-//			{
-//				priority++;
-//			}
-//		}
 		filewrite.newLine();
 		filewrite.write("Car of id"+c.id+" booked ");
 		c.slot_booked = true;
 		System.out.println("Your slot has been booked Car ID "+c.id);
 		filewrite.write(time,0,time.length());
-//		filewrite.write(",");
-//		filewrite.write("priority is " + String.valueOf(priority));
 		f.setWritable(false);
 	}catch(IOException e)
 	{
@@ -172,6 +166,7 @@ public void BookSlot(Car c, String date, String filepath)
 	
 	
 }
+//this function describes the functionalities present in the admin mode
 private void adminmode() throws IOException
 {
 	System.out.println("Which charging station file would you like to work with?");
@@ -201,6 +196,7 @@ private void adminmode() throws IOException
     	f.setWritable(false);
     }
 }
+// this function is implemented to validate the user entered date is in the correct format or not
 public static boolean ValidateDate(String date)
 {
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
