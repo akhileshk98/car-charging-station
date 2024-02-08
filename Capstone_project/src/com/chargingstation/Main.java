@@ -30,21 +30,19 @@ public class Main{
 	  int Value = Integer.parseInt(in.nextLine());
 	  switch (Value){
 	  case 1: //For having a registered user list to access the charging station
-		  for(int i = 0;i<3;i++)
-		  {
-			  new UserName().NewUserRegistration(User_List);
-		  }
+		  
+		  boolean val = new UserName().NewUserRegistration(User_List);
+		  if(val == false) {break;}
 		  
 		  for(int i =0;i<cs.length;i++)
 		  {
 			  cs[i]= new ChargingStation(sharedResource,i);
 			  thread_consumer[i] =  new Thread(cs[i]);
 		  }
-		  for(int i =0;i<3;i++)
-		  {
+		  
 			//prompt the user for booking the slots in the timeslot manager and getting added to the queue
-		    new TimeSlotManager().timeslot(cs, User_List,Car_List);
-		  }
+		   val =new TimeSlotManager().timeslot(cs, User_List,Car_List);
+		    if(val == false) {break;}
 		  
 		  Thread thread_producer = new Thread(new Producer(sharedResource,Car_List,Value));
 		//start producing the cars
@@ -75,7 +73,8 @@ public class Main{
 	    	  System.out.println("Invalid Input ");
 	  }
 	  // To allow access to the log files of the charging station or energy management system
-      Logging.FetchLogFiles();
+      //Logging.FetchLogFiles();
+      System.out.println("Exiting program.");
       
 	}
 }
