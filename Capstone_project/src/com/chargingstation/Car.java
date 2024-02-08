@@ -5,6 +5,7 @@ public class Car {
 	int id;
 	boolean slot_booked;
 	String status;
+	long car_time;
 
 	// Constructor to initialize the Car object with an id
 	Car(int id) {
@@ -19,6 +20,9 @@ public class Car {
 		
 		//Initialize the status of the car to available(neither waiting nor an ongoing charge happening.
 		this.status="available";
+		
+		//Initialize the wait time of the car
+		this.car_time = 0;
 	}
 	//This constructor is added  for simulation purpose for more number of cars
 	Car(int id, boolean status)
@@ -45,6 +49,10 @@ public class Car {
 	{
 		return this.slot_booked;
 	}
+	public long getcarwaittime()
+	{
+		return this.car_time;
+	}
 	//setter
 	public void setCarStatus(String S)
 	{
@@ -58,7 +66,10 @@ public class Car {
 	{
 		 this.slot_booked = slotbooked;
 	}
-	
+	public void setcartime(long time)
+	{
+		this.car_time = time;
+	}
 	
 	
 }

@@ -1,0 +1,72 @@
+Car of car id 0arrived at charging station 0 at 16:49:09
+Car of car id 0 at charging station 0 has occupied a slot and the space available now is 1 at 16:49:09
+Car of car id 0 at charging station 0 has reduced the charge.Charge now is 475 at 16:49:09
+Car ID 0 in charging station 0 is charging in the charging station at 16:49:09
+Car of car id 3arrived at charging station 0 at 16:49:09
+Car of car id 3 at charging station 0 has occupied a slot and the space available now is 0 at 16:49:09
+Car of car id 3 at charging station 0 has reduced the charge.Charge now is 450 at 16:49:09
+Car ID 3 in charging station 0 is charging in the charging station at 16:49:09
+Car ID 6 in charging station 0 is waiting for a slot in the charging station at 16:49:10
+Car of car id 6 got tired of waiting and is now added back to the queue at 16:49:13
+Car ID 9 in charging station 0 is waiting for a slot in the charging station at 16:49:13
+Car ID 0 in charging station 0 charged in charging station at 16:49:14
+Car ID 0 freed up a spot and space available now is 1 at 16:49:14
+Car ID 9 that was waiting, got a spot within its waiting capacity at 16:49:14
+Car ID 12 in charging station 0 is waiting for a slot in the charging station at 16:49:14
+Car ID 9 in charging station 0 is charging in the charging station at 16:49:14
+Car ID 3 in charging station 0 charged in charging station at 16:49:14
+Car ID 3 freed up a spot and space available now is 1 at 16:49:14
+Car ID 12 that was waiting, got a spot within its waiting capacity at 16:49:14
+Car ID 15 in charging station 0 is waiting for a slot in the charging station at 16:49:14
+Car ID 12 in charging station 0 is charging in the charging station at 16:49:14
+Car of car id 15 got tired of waiting and is now added back to the queue at 16:49:17
+Car ID 18 in charging station 0 is waiting for a slot in the charging station at 16:49:17
+Car ID 9 in charging station 0 charged in charging station at 16:49:19
+Car ID 9 freed up a spot and space available now is 1 at 16:49:19
+Car ID 18 that was waiting, got a spot within its waiting capacity at 16:49:19
+Car ID 7 in charging station 0 is waiting for a slot in the charging station at 16:49:19
+Car ID 18 in charging station 0 is charging in the charging station at 16:49:19
+Car ID 12 in charging station 0 charged in charging station at 16:49:19
+Car ID 12 freed up a spot and space available now is 1 at 16:49:19
+Car ID 7 that was waiting, got a spot within its waiting capacity at 16:49:19
+Car ID 7 in charging station 0 is charging in the charging station at 16:49:19
+Car ID 21 in charging station 0 is waiting for a slot in the charging station at 16:49:19
+Car of car id 21 got tired of waiting and is now added back to the queue at 16:49:22
+Car ID 24 in charging station 0 is waiting for a slot in the charging station at 16:49:22
+Car ID 18 in charging station 0 charged in charging station at 16:49:24
+Car ID 18 freed up a spot and space available now is 1 at 16:49:24
+Car ID 24 that was waiting, got a spot within its waiting capacity at 16:49:24
+Car ID 27 in charging station 0 is waiting for a slot in the charging station at 16:49:24
+Car ID 24 in charging station 0 is charging in the charging station at 16:49:24
+Car ID 7 in charging station 0 charged in charging station at 16:49:24
+Car ID 7 freed up a spot and space available now is 1 at 16:49:24
+Car ID 27 that was waiting, got a spot within its waiting capacity at 16:49:24
+Car ID 30 in charging station 0 is waiting for a slot in the charging station at 16:49:24
+Car ID 27 in charging station 0 is charging in the charging station at 16:49:24
+Car of car id 30 got tired of waiting and is now added back to the queue at 16:49:27
+Car ID 15 in charging station 0 is waiting for a slot in the charging station at 16:49:27
+Car ID 24 in charging station 0 charged in charging station at 16:49:29
+Car ID 24 freed up a spot and space available now is 1 at 16:49:29
+Car ID 15 that was waiting, got a spot within its waiting capacity at 16:49:29
+Car ID 34 in charging station 0 is waiting for a slot in the charging station at 16:49:29
+Car ID 15 in charging station 0 is charging in the charging station at 16:49:29
+Car ID 27 in charging station 0 charged in charging station at 16:49:29
+Car ID 27 freed up a spot and space available now is 1 at 16:49:29
+Car ID 34 that was waiting, got a spot within its waiting capacity at 16:49:29
+Car ID 22 in charging station 0 is waiting for a slot in the charging station at 16:49:29
+Car ID 34 in charging station 0 is charging in the charging station at 16:49:29
+Car of car id 22 got tired of waiting and is now added back to the queue at 16:49:32
+Car ID 31 in charging station 0 is waiting for a slot in the charging station at 16:49:32
+Car ID 15 in charging station 0 charged in charging station at 16:49:34
+Car ID 15 freed up a spot and space available now is 1 at 16:49:34
+Car ID 31 that was waiting, got a spot within its waiting capacity at 16:49:34
+Car ID 23 in charging station 0 is waiting for a slot in the charging station at 16:49:34
+Car ID 31 in charging station 0 is charging in the charging station at 16:49:34
+Car ID 34 in charging station 0 charged in charging station at 16:49:34
+Car ID 34 freed up a spot and space available now is 1 at 16:49:34
+Car ID 23 that was waiting, got a spot within its waiting capacity at 16:49:34
+Car ID 23 in charging station 0 is charging in the charging station at 16:49:34
+Car ID 31 in charging station 0 charged in charging station at 16:49:39
+Car ID 31 freed up a spot and space available now is 1 at 16:49:39
+Car ID 23 in charging station 0 charged in charging station at 16:49:39
+Car ID 23 freed up a spot and space available now is 2 at 16:49:39

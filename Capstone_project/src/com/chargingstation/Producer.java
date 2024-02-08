@@ -31,7 +31,7 @@ class Producer implements Runnable {
 		//this code is for producing cars statically to simulate more number of cars
 		else if (Value ==2)
 		{
-			Car obj[]=new Car[20];
+			Car obj[]=new Car[35];
 			for(int i=0;i<obj.length;i++)
 			{
 			   obj[i] = new Car(i,true);// Simulating the slot booked as true to demonstrate multi threading charging for more number of cars.
