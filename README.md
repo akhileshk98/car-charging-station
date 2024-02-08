@@ -4,8 +4,8 @@ To demonstrate our simulation we have two methods. One is through an interactive
 Another way to demonstrate simulatenous charging of multiple cars across different charging station, we have created a fixed pool of around 20 cars.
 
 ## Technologies Used
-- Programming Language- Java
-- IDE- Eclipse Integrated Development Environment
+- Programming Language- Java. JDK Version: 21
+- IDE- Eclipse Integrated Development Environment Ver: 2023-12
 
 ## Team Members - Team 10
 - Krithika Premkumar (7218970)
