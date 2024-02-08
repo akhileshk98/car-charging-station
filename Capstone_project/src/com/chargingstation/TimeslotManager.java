@@ -39,24 +39,31 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 	}
  // this prompt asks the user to enter the timeslot manager
  // where he or she can book the slot or enter into the admin mode
-public void timeslot(ChargingStation [] cs,ArrayList<UserName>List,ArrayList<Car>Priority_List)
-{
-	this.cs = cs;
-	System.out.println("Would you like to open the Timeslot Manager");
-	Scanner in = new Scanner(System.in);
- 	try {
- 	if((in.nextLine().toLowerCase()).equals("yes"))
- 	{
- 		CheckValidUser(List,Priority_List);
- 	}
- 	else
- 	{
- 		System.out.println("Charging station can be used only with prebooked slots");
- 	}
- 	} catch (NoSuchElementException e) {
- 	    System.out.println("No input found.");
- 	}
- }
+    public boolean timeslot(ChargingStation[] cs, ArrayList<UserName> List, ArrayList<Car> Priority_List) {
+        this.cs = cs;
+        System.out.println("Would you like to open the Timeslot Manager");
+        Scanner in = new Scanner(System.in);
+        int attempts = 0; // Counter for number of attempts
+
+        while (attempts < 3) { // Repeat the loop for three attempts
+            String userInput = in.nextLine().toLowerCase(); 
+
+            if (userInput.equals("yes")) {
+                CheckValidUser(List, Priority_List);
+                return true; 
+            } else if (userInput.equals("no")) {
+                System.out.println("Charging station can be used only with prebooked slots");
+                return true; 
+            } else {
+                System.out.println("Invalid input. Please enter 'yes' or 'no'");
+                attempts++; 
+            }
+        }
+
+        // Print a message if maximum attempts are reached
+        System.out.println("Maximum attempts reached. Exiting Timeslot Manager.");
+        return false; // Return false if maximum attempts are reached without valid input
+    }
 
 // this section will validate whether the entered user credentials are correct or not
 private void CheckValidUser(ArrayList<UserName>List,ArrayList<Car>Priority_List)
