@@ -46,3 +46,39 @@ Charging Station 0getting charged from the GRID at 02:08:45
 Charging Station 2getting charged with WIND Energy at 02:08:45
 Charging of station 0from the GRID is done.Available charge now is 700 at 02:08:45
 Charging of station 2with WIND Energy done.Available charge now is 775 at 02:08:48
+Charging Station 0getting charged with WIND Energy at 02:30:56
+Charging Station 1getting charged with SOLAR Energy at 02:30:56
+Charging Station 2getting charged with WIND Energy at 02:30:56
+Charging Station 0getting charged from the GRID at 02:30:56
+Charging Station 1getting charged with WIND Energy at 02:30:56
+Charging of station 0from the GRID is done.Available charge now is 650 at 02:30:56
+Charging Station 2getting charged with WIND Energy at 02:30:56
+Charging of station 0with WIND Energy done.Available charge now is 950 at 02:30:59
+Charging of station 1with SOLAR Energy done.Available charge now is 600 at 02:30:59
+Charging of station 2with WIND Energy done.Available charge now is 700 at 02:30:59
+Charging of station 1with WIND Energy done.Available charge now is 900 at 02:30:59
+Charging of station 2with WIND Energy done.Available charge now is 1000 at 02:30:59
+Charging Station 0getting charged from the GRID at 02:31:03
+Charging Station 1getting charged with SOLAR Energy at 02:31:04
+Charging of station 0from the GRID is done.Available charge now is 675 at 02:31:04
+Charging Station 2getting charged from the GRID at 02:31:04
+Charging of station 2from the GRID is done.Available charge now is 675 at 02:31:04
+Charging Station 1getting charged with WIND Energy at 02:31:05
+Charging of station 1with SOLAR Energy done.Available charge now is 600 at 02:31:07
+Charging of station 1with WIND Energy done.Available charge now is 900 at 02:31:08
+Charging Station 0getting charged with SOLAR Energy at 02:31:24
+Charging Station 2getting charged with SOLAR Energy at 02:31:25
+Charging of station 0with SOLAR Energy done.Available charge now is 650 at 02:31:27
+Charging of station 2with SOLAR Energy done.Available charge now is 675 at 02:31:28
+Charging Station 0getting charged with SOLAR Energy at 02:32:11
+Charging Station 1getting charged with WIND Energy at 02:32:11
+Charging Station 2getting charged with WIND Energy at 02:32:11
+Charging Station 0getting charged from the GRID at 02:32:11
+Charging of station 0from the GRID is done.Available charge now is 650 at 02:32:11
+Charging Station 2getting charged from the GRID at 02:32:11
+Charging of station 2from the GRID is done.Available charge now is 650 at 02:32:11
+Charging Station 1getting charged from the GRID at 02:32:11
+Charging of station 1from the GRID is done.Available charge now is 650 at 02:32:12
+Charging of station 2with WIND Energy done.Available charge now is 950 at 02:32:14
+Charging of station 0with SOLAR Energy done.Available charge now is 850 at 02:32:14
+Charging of station 1with WIND Energy done.Available charge now is 950 at 02:32:14
