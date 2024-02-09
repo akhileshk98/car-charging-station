@@ -42,7 +42,8 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
  // where he or she can book the slot or enter into the admin mode
     public boolean timeslot(ChargingStation[] cs, ArrayList<UserName> List, ArrayList<Car> Priority_List) {
         this.cs = cs;
-        System.out.println("Would you like to open the Timeslot Manager");
+        System.out.println("Would you like go through our service");
+        System.out.println("Please enter 'yes' or 'no'");
         try (Scanner in = new Scanner(System.in)) {
 			int attempts = 0; // Counter for number of attempts
 
@@ -53,7 +54,7 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 			        CheckValidUser(List, Priority_List);
 			        return true; 
 			    } else if (userInput.equals("no")) {
-			        System.out.println("Charging station can be used only with prebooked slots");
+			        //System.out.println("Charging station can be used only with prebooked slots");
 			        return true; 
 			    } else {
 			        System.out.println("Invalid input. Please enter 'yes' or 'no'");
@@ -88,10 +89,10 @@ private void CheckValidUser(ArrayList<UserName>List,ArrayList<Car>Priority_List)
 						{
 							if(obj.password.equals(in.nextLine()))
 							{
-								System.out.println("Hello Admin");
+								System.out.println("Hello Admin(ID - " + obj.userName + ")");
 								user_identified = true;
 								try {
-									adminmode(); // admin will be entering into the admin mode
+									adminmode(obj.c,Priority_List); // admin will be entering into the admin mode
 								}catch(Exception e)
 								{
 									
@@ -114,7 +115,7 @@ private void CheckValidUser(ArrayList<UserName>List,ArrayList<Car>Priority_List)
 							if(obj.password.equals(in.nextLine()))
 							{   
 								user_identified = true;
-								System.out.println("Hello"+obj.userName);
+								System.out.println("Hello "+obj.userName);
 								Usermode(obj.c,Priority_List); // this is the user mode
 								
 							}
@@ -129,7 +130,11 @@ private void CheckValidUser(ArrayList<UserName>List,ArrayList<Car>Priority_List)
 				{
 				  System.out.println("No such user, please register with us");	
 				}
-}
+		}
+		else if(response.equals("no")) {
+			System.out.println("Please register with us to use our service");
+		}
+		
 }
 
 // this function describes the functionalities present in the user mode
@@ -177,36 +182,65 @@ public void BookSlot(Car c, String date, String filepath)
 	
 }
 //this function describes the functionalities present in the admin mode
-private void adminmode() throws IOException
+private void adminmode(Car c,ArrayList<Car> List) throws IOException
 {
-	Logging.FetchLogFiles();
-//	System.out.println("Which charging station file would you like to work with?");
-//	for(int i=0;i<cs.length;i++)
-//	{
-//		System.out.println("Timeslot"+i+".txt");
-//	}
-//	Scanner in = new Scanner(System.in);
-//	String filepath = in.nextLine();
-//	Path p = Paths.get(filepath);
-//	File f = new File(filepath);
-//	f.setWritable(true);
-//    System.out.println("What operation would you like to perform?");
-//    System.out.println("1.delete file %n2.empty contents");
-//    switch(in.nextLine()) {
-//    case "delete file":
-//        Files.deleteIfExists(p);
-//        break;
-//    case "empty contents":
-//        Files.newBufferedWriter(p, TRUNCATE_EXISTING);
-//    	break;
-//        default:
-//    	System.out.println("Unrecognized operation");
-//    	}
-//    if(f!=null)
-//    {
-//    	f.setWritable(false);
-//    }
+	System.out.println("Would you like to book a slot");
+	System.out.println("Please enter 'yes' or 'no' ");
+	try (Scanner in = new Scanner(System.in)) {
+		int attempts = 0; // Counter for number of attempts
+		while (attempts < 3) { // Repeat the loop for three attempts
+		    String userInput = in.nextLine().toLowerCase(); 
+
+		    if (userInput.equals("yes")) {
+		    	Usermode(c,List);
+		    	logs();
+		        break; 
+		    } else if (userInput.equals("no")) {
+		        logs();
+		        break; 
+		    } else {
+		        System.out.println("Invalid input. Please enter 'yes' or 'no'");
+		        attempts++; 
+		    }
+		}
+	}
+	
+
 }
+
+
+
+public void logs() {
+    System.out.println("Would you like to open the Log files");
+    System.out.println("Please enter 'yes' or 'no'");
+    try (Scanner in = new Scanner(System.in)) {
+		int attempts = 0; // Counter for number of attempts
+
+		while (attempts < 3) { // Repeat the loop for three attempts
+		    String userInput = in.nextLine().toLowerCase(); 
+
+		    if (userInput.equals("yes")) {
+		    	Logging.FetchLogFiles();
+		        break; 
+		    } else if (userInput.equals("no")) {
+		        System.out.println("OK closing the Admin mode");
+		        break; 
+		    } else {
+		        System.out.println("Invalid input. Please enter 'yes' or 'no'");
+		        attempts++; 
+		    }
+		}
+	}
+    // Print a message if maximum attempts are reached
+    System.out.println("Maximum attempts reached. Exiting User Interface."); 
+}
+
+
+
+
+
+
+
 // this function is implemented to validate the user entered date is in the correct format or not
 public static boolean ValidateDate(String date)
 {
