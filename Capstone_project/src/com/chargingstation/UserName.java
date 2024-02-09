@@ -15,8 +15,8 @@ public class UserName {
     static Map<String, String> reservedUsernames = new HashMap<>();
 
     static {
-        reservedUsernames.put("akhilesh", "akhileshpass");
-        reservedUsernames.put("akhil", "akhilpass");
+    	reservedUsernames.put("akhil", "akhilpass");
+    	reservedUsernames.put("akhilesh", "akhileshpass");
         reservedUsernames.put("krithika", "krithikapass");
         reservedUsernames.put("vipink", "vipinkpass");
     }
