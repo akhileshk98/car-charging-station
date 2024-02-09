@@ -7,7 +7,7 @@ import java.util.Scanner;
 	projectName = "car-charging-station",
 	version = "5.0",
 	description = "JAVA Capstone Project Team 10", 
-	developer = {"Akhilesh Kakkayamkode", "Akhil Narayanaswamy", "Krithika Premkumar", "Vipin Krishna Vijayakumar"}
+	developer = {"Akhil Narayanaswamy","Akhilesh Kakkayamkode", "Krithika Premkumar", "Vipin Krishna Vijayakumar"}
 )
 
 public class Main{
@@ -72,8 +72,8 @@ public class Main{
 	      default:
 	    	  System.out.println("Invalid Input ");
 	  }
-	  // To allow access to the log files of the charging station or energy management system
-      //Logging.FetchLogFiles();
+	  
+	  System.out.println("Thankyou for using our service");
       System.out.println("Exiting program.");
       
 	}
