@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
@@ -42,24 +43,24 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
     public boolean timeslot(ChargingStation[] cs, ArrayList<UserName> List, ArrayList<Car> Priority_List) {
         this.cs = cs;
         System.out.println("Would you like to open the Timeslot Manager");
-        Scanner in = new Scanner(System.in);
-        int attempts = 0; // Counter for number of attempts
+        try (Scanner in = new Scanner(System.in)) {
+			int attempts = 0; // Counter for number of attempts
 
-        while (attempts < 3) { // Repeat the loop for three attempts
-            String userInput = in.nextLine().toLowerCase(); 
+			while (attempts < 3) { // Repeat the loop for three attempts
+			    String userInput = in.nextLine().toLowerCase(); 
 
-            if (userInput.equals("yes")) {
-                CheckValidUser(List, Priority_List);
-                return true; 
-            } else if (userInput.equals("no")) {
-                System.out.println("Charging station can be used only with prebooked slots");
-                return true; 
-            } else {
-                System.out.println("Invalid input. Please enter 'yes' or 'no'");
-                attempts++; 
-            }
-        }
-
+			    if (userInput.equals("yes")) {
+			        CheckValidUser(List, Priority_List);
+			        return true; 
+			    } else if (userInput.equals("no")) {
+			        System.out.println("Charging station can be used only with prebooked slots");
+			        return true; 
+			    } else {
+			        System.out.println("Invalid input. Please enter 'yes' or 'no'");
+			        attempts++; 
+			    }
+			}
+		}
         // Print a message if maximum attempts are reached
         System.out.println("Maximum attempts reached. Exiting Timeslot Manager.");
         return false; // Return false if maximum attempts are reached without valid input
@@ -139,8 +140,10 @@ private void Usermode(Car c,ArrayList<Car> List)
 	String date = in.nextLine();
 	if(ValidateDate(date)==true)
 	{
-	  	BookSlot(c,date,"TimeslotManager\\Timeslot.txt");
+	  	if(isDateAfterCurrentDate(date)) {
+		BookSlot(c,date,"TimeslotManager\\Timeslot.txt");
 	  	List.add(c);
+	  	}
 		
 	}
 	
@@ -155,9 +158,9 @@ public void BookSlot(Car c, String date, String filepath)
 	{
 
 		System.out.println("Please choose one of the timeslot");
-		System.out.println("1. 12:00 to 13:00");
-        System.out.println("2. 15:00 to 16:00");
-        System.out.println("3. 10:00 to 11:00");
+		System.out.println("Enter 1 for 10:00 to 11:00");
+        System.out.println("Enter 2 for 15:00 to 16:00");
+        System.out.println("Enter 3 for 12:00 to 13:00");
 		Scanner in = new Scanner(System.in);
 		String time = in.nextLine();
 		filewrite.newLine();
@@ -176,32 +179,33 @@ public void BookSlot(Car c, String date, String filepath)
 //this function describes the functionalities present in the admin mode
 private void adminmode() throws IOException
 {
-	System.out.println("Which charging station file would you like to work with?");
-	for(int i=0;i<cs.length;i++)
-	{
-		System.out.println("Timeslot"+i+".txt");
-	}
-	Scanner in = new Scanner(System.in);
-	String filepath = in.nextLine();
-	Path p = Paths.get(filepath);
-	File f = new File(filepath);
-	f.setWritable(true);
-    System.out.println("What operation would you like to perform?");
-    System.out.println("1.delete file %n2.empty contents");
-    switch(in.nextLine()) {
-    case "delete file":
-        Files.deleteIfExists(p);
-        break;
-    case "empty contents":
-        Files.newBufferedWriter(p, TRUNCATE_EXISTING);
-    	break;
-        default:
-    	System.out.println("Unrecognized operation");
-    	}
-    if(f!=null)
-    {
-    	f.setWritable(false);
-    }
+	Logging.FetchLogFiles();
+//	System.out.println("Which charging station file would you like to work with?");
+//	for(int i=0;i<cs.length;i++)
+//	{
+//		System.out.println("Timeslot"+i+".txt");
+//	}
+//	Scanner in = new Scanner(System.in);
+//	String filepath = in.nextLine();
+//	Path p = Paths.get(filepath);
+//	File f = new File(filepath);
+//	f.setWritable(true);
+//    System.out.println("What operation would you like to perform?");
+//    System.out.println("1.delete file %n2.empty contents");
+//    switch(in.nextLine()) {
+//    case "delete file":
+//        Files.deleteIfExists(p);
+//        break;
+//    case "empty contents":
+//        Files.newBufferedWriter(p, TRUNCATE_EXISTING);
+//    	break;
+//        default:
+//    	System.out.println("Unrecognized operation");
+//    	}
+//    if(f!=null)
+//    {
+//    	f.setWritable(false);
+//    }
 }
 // this function is implemented to validate the user entered date is in the correct format or not
 public static boolean ValidateDate(String date)
@@ -216,7 +220,21 @@ public static boolean ValidateDate(String date)
 	catch(Exception e)
 	{
 		System.out.println("Invalid Date entered");
+		return false;
 	}
+    
+}
+
+public static boolean isDateAfterCurrentDate(String date) {
+    // Parse the input date string
+    LocalDate inputDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    
+    // Get the current date
+    LocalDate currentDate = LocalDate.now();
+    if(inputDate.isAfter(currentDate)) {
+    	return true;
+    }
+    System.out.println("As the designated date has elapsed, you are no longer able to secure a time slot for it");
     return false;
 }
 
